@@ -1,0 +1,82 @@
+# Define the services that make up your application
+services:
+  # Service for your Spring Boot application
+  app:
+    profiles: ["dev"]
+    # Build the image for this service using the Dockerfile in the current directory
+    image: np-backend-app:1.0
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    working_dir: /home/app
+    command: ["./run_command.sh"]
+    # Map ports from the host to the container
+    # 8080: For the Spring Boot application's web server
+    # 5005: For Spring Boot DevTools remote debugging and hot reload
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    # Mount the local project directory into the container
+    # This is crucial for Spring Boot DevTools hot reloading
+    # Changes made to your local source code will be reflected in the running container
+    volumes:
+      - .:/home/app # Mounts the current host directory to /app inside the container
+    # Load environment variables from the .env file
+    env_file:
+      - .env
+    # Set environment variables for the Spring Boot application, referencing those from .env
+    environment:
+      # Database connection URL. 'db' refers to the MariaDB service name
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      # Ensure DevTools remote secret matches the one in your Dockerfile CMD
+      SPRING_DEVTOOLS_REMOTE_SECRET: ${DEVTOOLS_SECRET}
+      # Set active profiles, e.g., 'dev' to pick up application-dev.properties
+      SPRING_PROFILES_ACTIVE: dev
+    # Specify that the 'app' service depends on the 'db' service
+    # This ensures 'db' starts before 'app'
+    depends_on:
+      - db
+    # Restart policy: always restart if the container stops
+    # restart: always
+    networks:
+      - app_network
+
+  # Service for the MariaDB database
+  db:
+    profiles: ["dev"]
+    # Use the official MariaDB image from Docker Hub
+    image: mariadb:11.2.6
+    # Load environment variables from the .env file
+    env_file:
+      - .env
+    # Set environment variables required for MariaDB
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${DB_NAME}
+      MARIADB_USER: ${DB_USERNAME}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+    # Map the MariaDB default port from the host to the container
+    # 3306: Default MariaDB port
+    ports:
+      - "3306:3306"
+    # Persist database data using a named volume
+    # This ensures your data is not lost when the container is stopped or removed
+    volumes:
+      - db_data:/var/lib/mysql # Mounts the named volume 'db_data' to the MariaDB data directory
+    # Restart policy: always restart if the container stops
+    # restart: always
+    networks:
+      - app_network
+
+# Define named volumes for data persistence
+volumes:
+  # Volume for MariaDB data
+  db_data:
+
+# A defined network is required for inter-container communication
+networks:
+  # For app services
+  app_network:
+    driver: bridge

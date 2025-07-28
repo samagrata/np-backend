@@ -1,0 +1,2 @@
+ALTER TABLE stories
+MODIFY COLUMN ss_file TEXT;

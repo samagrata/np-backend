@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: np-backend
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    password: ${DB_PASSWORD}
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${DB_USERNAME}
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyHbmImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    open-in-view: false
+    show-sql: true
+  security:
+    user:
+      password: rest_user_pass
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG
+
+app:
+  jwt:
+    key: ${APP_JWT_SECRET}
+    algorithm: ${APP_JWT_ALGORITHM}
+    issuer: ${APP_JWT_ISSUER}
+    expires-in: ${APP_JWT_EXPIRES_IN}

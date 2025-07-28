@@ -1,0 +1,8 @@
+CREATE TABLE cases (
+	id            BIGINT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	case_number   VARCHAR(255)    UNIQUE,
+	closing_date  TIMESTAMP,
+	file          VARCHAR(512),
+  created_at    TIMESTAMP       DEFAULT CURRENT_TIMESTAMP,
+  updated_at    TIMESTAMP       DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);

@@ -1,0 +1,8 @@
+CREATE TABLE expenses (
+	id          BIGINT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	fund_id     BIGINT          UNIQUE,
+  name        VARCHAR(255),
+	amount      FLOAT,
+  created_at  TIMESTAMP       DEFAULT CURRENT_TIMESTAMP,
+  updated_at  TIMESTAMP       DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);

@@ -1,0 +1,5 @@
+ALTER TABLE stories
+MODIFY COLUMN carousel_images VARCHAR(1024);
+
+ALTER TABLE stories
+MODIFY COLUMN carousels TEXT;

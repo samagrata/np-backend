@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "app.jwt.key",
+    "type": "java.lang.String",
+    "description": "JWT key"
+  },
+  {
+    "name": "app.jwt.algorithm",
+    "type": "java.lang.String",
+    "description": "JWT algorithm (e.g. SHA-256)"
+  },
+  {
+    "name": "app.jwt.issuer",
+    "type": "java.lang.String",
+    "description": "JWT issuer (url for the issuer)"
+  },
+  {
+    "name": "app.jwt.expires-in",
+    "type": "java.lang.String",
+    "description": "Time for token expiry"
+  }
+]}

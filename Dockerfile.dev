@@ -1,0 +1,11 @@
+FROM gradle:jdk17-ubi-minimal
+
+# Expose the port your Spring Boot application runs on (default is 8080).
+# This allows external access to your application.
+EXPOSE 8080
+
+# Expose the debugger port (5005) for remote debugging.
+# This is crucial for Spring Boot DevTools' remote update feature.
+EXPOSE 5005
+
+CMD ["echo", "$JAVA_HOME"]
