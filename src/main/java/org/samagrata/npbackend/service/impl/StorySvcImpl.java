@@ -440,11 +440,13 @@ public class StorySvcImpl implements StoryService {
     storyResponse.setTitle(storyEntity.getTitle());
 
     storyResponse.setPublish(storyEntity.getPublish());
-    storyResponse.setPublishDate(
+    if (storyEntity.getPublishDate() != null) {
+      storyResponse.setPublishDate(
       storyEntity.getPublishDate().format(
         DateTimeFormatter.ofPattern("yyyy-MM-dd")
       )
     );
+    }
 
     if (storyEntity.getSsFile() != null) {
       String orgStr = new String(
