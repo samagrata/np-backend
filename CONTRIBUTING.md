@@ -19,8 +19,8 @@ Review the [Code of Conduct](CODE_OF_CONDUCT.md) file, which outlines community 
 
 ## Ways to Contribute
 
-*   **Reporting Bugs:** Check existing [issues](https://github.com/your-username/your-repo/issues) to see if a bug has already been reported. If not, open a new issue following the Bug Report Template.
-*   **Suggesting Enhancements:** Suggest a new feature or improvement by opening a new [issue](https://github.com/your-username/your-repo/issues) following the Feature Request Template.
+*   **Reporting Bugs:** Check existing [issues](https://github.com/samagrata/np-backend/issues) to see if a bug has already been reported. If not, open a new issue following the Bug Report Template.
+*   **Suggesting Enhancements:** Suggest a new feature or improvement by opening a new [issue](https://github.com/samagrata/np-backend/issues) following the Feature Request Template.
 *   **Improving Documentation:** Contribute to guides, READMEs, tutorials, and API documentation.
 *   **Contributing Code:** Code contributions, including bug fixes, new features, and performance optimizations, are appreciated.
 *   **Testing:** Help ensure project quality by reproducing reported bugs, creating new test cases, or improving existing test coverage.
@@ -31,7 +31,7 @@ Review the [Code of Conduct](CODE_OF_CONDUCT.md) file, which outlines community 
 1.  **Fork the repository:** Create a copy of the repository under your GitHub account by clicking the "Fork" button.
 2.  **Clone your fork:** Clone your forked repository to your local machine using the HTTPS URL provided on your repository page:
     ```bash
-    git clone https://github.com/your-username/your-repo.git
+    git clone https://github.com/samagrata/np-backend.git
     cd your-repo
     ```
 3.  **Set up your development environment:**
@@ -72,7 +72,7 @@ Constructive feedback and collaboration are valued. Maintainers will review the 
 
 ## Communication
 
-*   **Issue Tracker:** Report bugs and suggest enhancements in the project's [issue tracker](https://github.com/your-username/your-repo/issues).
+*   **Issue Tracker:** Report bugs and suggest enhancements in the project's [issue tracker](https://github.com/samagrata/np-backend/issues).
 *   **Discussion Forums:** Join the [Project Name] discussion forum or mailing list for general discussions and questions.
 *   **Chat Channels:** Participate in chat channels (e.g., Slack, IRC, or Discord) for quick collaboration and informal conversations.
 *   **Public Communication:** Keep discussions and communication within the project's public channels whenever possible to ensure transparency and allow more people to learn and benefit from the interactions.
