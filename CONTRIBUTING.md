@@ -1,6 +1,6 @@
 ## Welcome
 
-All contributions to this are welcome! This guide explains the contribution process, ensuring a positive experience for everyone involved.
+All contributions to this project are welcome! This guide explains the contribution process, ensuring a positive experience for everyone involved.
 
 ## Table of Contents
 
@@ -32,7 +32,7 @@ Review the [Code of Conduct](CODE_OF_CONDUCT.md) file, which outlines community 
 2.  **Clone your fork:** Clone your forked repository to your local machine using the HTTPS URL provided on your repository page:
     ```bash
     git clone https://github.com/samagrata/np-backend.git
-    cd your-repo
+    cd np-backend
     ```
 3.  **Set up your development environment:**
     *   **Prerequisites:** Install Docker and an IDE such VS Code
