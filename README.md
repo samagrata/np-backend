@@ -4,7 +4,7 @@ This project was created using Java 17, Spring Boot 3.5, MariaDB 11.2 and Docker
 
 ### Configuration
 
-Environment values can be adjusted using the `.env` file. For production, it should be Git ignored.
+Environment values can be adjusted using the `.env` file. See the `.example.env` file for examples.
 
 ### Development server
 
