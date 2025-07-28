@@ -82,3 +82,5 @@ Constructive feedback and collaboration are valued. Maintainers will review the 
 This project is released under the [License Name] License. The full license text is available in the `LICENSE.txt` file [1].
 
 ## Recognition
+
+Attributions will be added against your contributions in a separate file. 
