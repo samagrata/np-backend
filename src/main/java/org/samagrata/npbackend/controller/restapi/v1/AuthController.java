@@ -56,7 +56,7 @@ public class AuthController {
     Optional<UserEntity> userEntity = userRepository.findByUsername(authRequest.username());
     if (userEntity.isPresent()) {
       String password = userEntity.get().getPassword();
-      if (passwordEncoder.matches(password, authRequest.password())) {
+      if (passwordEncoder.matches(authRequest.password(), password)) {
         authentication = authenticationManager.authenticate(
           new UsernamePasswordAuthenticationToken(
             authRequest.username(),
