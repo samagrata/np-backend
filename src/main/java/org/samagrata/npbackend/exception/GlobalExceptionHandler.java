@@ -36,7 +36,8 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(Exception.class)
   public ResponseEntity<String> handleException(Exception ex) {
     log.error("An unhandled exception occurred: ", ex);
-    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An internal server error occurred.");
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                         .body("{\"message\": \"An internal server error occurred\"}");
   }
 
   @ExceptionHandler(DataAccessException.class)
@@ -45,7 +46,7 @@ public class GlobalExceptionHandler {
   ) {
     log.error("Data Access Error: ", ex);
     return new ResponseEntity<>(
-      "A database error occurred, please try again later", 
+      "{\"message\": \"A database error occurred, please try again later\"}", 
       HttpStatus.INTERNAL_SERVER_ERROR
     );
   }
@@ -55,7 +56,7 @@ public class GlobalExceptionHandler {
     ResourceNotFoundException ex
   ) {
     return new ResponseEntity<>(
-      ex.getMessage(),
+      "{\"message\": " + ex.getMessage(),
       HttpStatus.NOT_FOUND
     );
   }
@@ -86,7 +87,10 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(DataIntegrityViolationException.class)
   public ResponseEntity<String> handleDataIntegrityViolation(DataIntegrityViolationException ex) {
     String errorMessage = "Data integrity violation: " + ex.getMostSpecificCause().getMessage();
-    return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+    return new ResponseEntity<>(
+      "{\"message\": " + errorMessage,
+      HttpStatus.BAD_REQUEST
+    );
   }
 
   @ExceptionHandler(ConstraintViolationException.class)
@@ -122,7 +126,7 @@ public class GlobalExceptionHandler {
     BadCredentialsException ex
   ) {
     return new ResponseEntity<>(
-      "Credentials are invalid",
+      "{\"message\": \"Wrong credentials\"}",
       HttpStatus.BAD_REQUEST
     );
   }
@@ -133,7 +137,7 @@ public class GlobalExceptionHandler {
   ) {
     log.error("Failed to process JSON", ex);
     return new ResponseEntity<>(
-      "An unexpected error occurred",
+      "{\"message\": \"An unexpected error occurred\"}",
       HttpStatus.INTERNAL_SERVER_ERROR
     );
   }
@@ -144,7 +148,7 @@ public class GlobalExceptionHandler {
   ) {
     log.error("Failed to extract JWT claims", ex);
     return new ResponseEntity<>(
-      "JWT parsing issue. Token is not valid?",
+      "{\"message\": \"JWT parsing issue. Token is not valid?\"}",
       HttpStatus.BAD_REQUEST
     );
   }
@@ -155,7 +159,7 @@ public class GlobalExceptionHandler {
   ) {
     log.error("A runtime exception occurred", ex);
     return new ResponseEntity<>(
-      "An unexpected error occurred",
+      "{\"message\": \"An unexpected error occurred\"}",
       HttpStatus.INTERNAL_SERVER_ERROR
     );
   }
@@ -167,7 +171,7 @@ public class GlobalExceptionHandler {
       log.error("Username not found exception: {}", ex.getMessage());
 
       return new ResponseEntity<>(
-        "Invalid username or password.",
+        "{\"message\": \"Username not present\"}",
         HttpStatus.UNAUTHORIZED
       );
     }
