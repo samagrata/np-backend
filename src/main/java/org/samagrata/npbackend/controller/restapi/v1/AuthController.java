@@ -1,6 +1,7 @@
 package org.samagrata.npbackend.controller.restapi.v1;
 
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,16 +48,29 @@ public class AuthController {
   }
 
   @PostMapping("/login")
-  public ResponseEntity<AuthResponse> authenticateUser(
+  public ResponseEntity<?> authenticateUser(
     @RequestBody AuthRequest authRequest
   ) {
-    
-    Authentication authentication = authenticationManager.authenticate(
-      new UsernamePasswordAuthenticationToken(
-        authRequest.username(),
-        authRequest.password()
-      )
-    );
+
+    Authentication authentication = null;
+    Optional<UserEntity> userEntity = userRepository.findByUsername(authRequest.username());
+    if (userEntity.isPresent()) {
+      String password = userEntity.get().getPassword();
+      if (passwordEncoder.matches(password, authRequest.password())) {
+        authentication = authenticationManager.authenticate(
+          new UsernamePasswordAuthenticationToken(
+            authRequest.username(),
+            authRequest.password()
+          )
+        );
+      } else {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                             .body("{\"message\": \"Wrong credentials\"}");
+      }
+    } else {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                           .body("{\"message\": \"Username not present\"}");
+    }
     
     SecurityContextHolder.getContext().setAuthentication(authentication);
     UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -76,7 +90,7 @@ public class AuthController {
        ).isPresent()
     ) {
       return new ResponseEntity<>(
-        "Username is already taken!", 
+        "{\"message\": \"Username is already taken!\"}",
         HttpStatus.BAD_REQUEST
       );
     }
@@ -100,7 +114,7 @@ public class AuthController {
     userRepository.save(user);
 
     return new ResponseEntity<>(
-      "User registered successfully",
+      "{\"message\": \"User registered successfully!\"}",
       HttpStatus.OK
     );
   }
